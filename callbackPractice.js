@@ -107,6 +107,30 @@ contains(names, 'Colt', function(result){
 // the callback function with the array of unique names.
 
     //Code Here
+var uniq = function(arr,cb){
+  var i = 0;
+  var j = arr.length;
+  var trig = 1;
+while(trig!==0){
+      if(arr[i]===arr[j]){
+        delete arr[i];
+        i++;
+        j = arr.length;
+      }
+      else if(i===(arr.length+1)){
+        trig=0;
+      }
+      else{
+        i++;
+      }
+  j--;
+  }
+  arr = arr.filter(function(a){
+    return (Boolean(a)===true)
+  });
+  cb(arr);
+};
+
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -115,12 +139,25 @@ uniq(names, function(uniqArr){
 
 // 6. Write a function called each that takes in an array of names. For each item, use a callback
 // function to return the indices and item.
+//
+//     Code Here
 
-    //Code Here
+var each = function(arr,cb){
+  var one = [];
+  var two = [];
+  for(var i=0;i<arr.length;i++){
+    two[i]=arr[i]
+    one[i]=i;
+    cb(one[i],two[i]);
+  }
+}
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
 });
+
+
+
 
 
 
@@ -149,6 +186,17 @@ var users = [
     address: '192 East 32 North'
   },
 ];
+
+var getUserById = function(arr,val,cb){
+  var one = [];
+  for(var i=0;i<arr.length;i++){
+    if(arr[i].id===val){
+      one=arr[i];
+    }
+  }
+  cb(one);
+}
+
 
 getUserById(users, '16t', function(user){
   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
